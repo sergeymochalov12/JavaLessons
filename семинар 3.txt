@@ -1,0 +1,22 @@
+среднее арифметическое
+public static void main(String[] args) {
+        // рассчитать среднее арифметическое чисел
+        File inputFile = new File("input.txt");
+        File outputFile = new File("output.txt");
+        int sum = 0;
+        int k = 0;
+        try {
+            Scanner scanner = new Scanner(inputFile);
+            while (scanner.hasNext()) {
+                sum += scanner.nextInt();
+                k++;
+            }
+            Integer average = sum / k;
+            PrintWriter writer = new PrintWriter(outputFile);
+            writer.println(average);
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(" File not found ");
+        }
+    }
+___________________________________________

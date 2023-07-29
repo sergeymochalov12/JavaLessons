@@ -1,0 +1,105 @@
+Задача на сортировку
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Arrays;
+import java.util.Calendar;
+
+class BubbleSort {
+    private static File log;
+    private static FileWriter fileWriter;
+
+    public static void sort(int[] mas) {
+          
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        String data1 = data.format(calendar.getTime());
+        String str = "";
+        boolean isFlag = false;
+        int temp = 0;
+        try(FileWriter writer = new FileWriter("log.txt")) {
+        for (int i = 0; i < mas.length; i++) {
+            for (int j = 0; j < mas.length-1; j++) {
+                if (mas[j] > mas[j + 1]) {
+                    temp = mas[j + 1];
+                    mas[j + 1] = mas[j];
+                    mas[j] = temp;
+                    isFlag = true;
+                }
+            }
+            str = data1 + " " +Arrays.toString(mas)+"\n";
+            writer.write(str);
+            writer.flush();
+            if (!isFlag) break;
+            isFlag = false;
+            }
+        }
+     catch (Exception e){
+        e.printStackTrace();
+    }
+  }
+}
+Калькулятор с логами
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.io.BufferedReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+class Calculator {
+    public int calculate(char op, int a, int b) {
+        // Напишите свое решение ниже
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        String data1 = data.format(calendar.getTime());
+        StringBuilder str = new StringBuilder();
+        int result = 0;
+
+        switch (op) {
+            case '+':
+                result = a + b;
+                break;
+            case '-':
+                result = a - b;
+                break;
+            case '*':
+                result = a * b;
+                break;
+            case '/':
+                if (b == 0) {
+                    System.out.println("ERROR");
+                    result = -1;
+                    break;
+                }
+                result = a / b;
+                break;
+            default:
+                System.out.println("Некорректный оператор: " + op);
+                result = -1;
+        }
+        str.append(data1).append(" User entered the first operand = ").append(a).append("\n")
+                .append(data1).append(" User entered the operation = ").append(op).append("\n")
+                .append(data1).append(" User entered the second operand = ").append(b).append("\n")
+                .append(data1).append(" Result is ").append(result).append("\n");
+
+        try(FileWriter writer = new FileWriter("log.txt", true)) {
+            writer.write(str.toString());
+            writer.flush();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+        }
+
+  }

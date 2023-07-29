@@ -1,0 +1,131 @@
+Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int pr = (n % 10) * (n%100/10) * (n/100);
+        int sum = n % 10 + n%100/10 + n/100;
+        int result = pr - sum;
+        System.out.println("result = " + result);
+_______________________________________________
+
+ctrl+alt+l
+ctrl+alt+o
+ctrl+alt+m
+________________________________________________
+
+/** enter
+______________________________________________
+
+
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        System.out.println("result = " + methodOne(n));
+        scanner.close();
+    }
+
+    /**
+     * @param n исходное число
+     * @return рез
+     * @apiNote https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/description/
+     */
+    private static int methodOne(int n) {
+        int pr = 1;
+        int sum = 0;
+        while (n != 0) {
+            pr *= n % 10;
+            sum += n % 10;
+            n /= 10;
+        }
+        return pr - sum;
+    }
+_______________________________________________________________________
+
+2 задача
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = getK(scanner, n);
+        System.out.println("k = " + k);
+    }
+
+    /**
+     * @param scanner
+     * @param n
+     * @return
+     * @apiNote Дана последовательность N целых чисел. Найти количество положительных чисел, после которых следует отрицательное число.
+     */
+    private static int getK(Scanner scanner, int n) {
+        int k = 0;
+        int a = 0;
+        for (int i = 0; i < n; i++) {
+            int b = scanner.nextInt();
+            if (a > 0 && b < 0) {
+                k++;
+            }
+            a = b;
+        }
+        return k;
+    }
+____________________________________________________
+задача 3
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
+        System.out.println("strResult = " + getString(str));
+    }
+
+    /**
+     * @param str
+     * @return
+     * @apiNote Дана строка. Поменять местами ее половины.
+     */
+    private static String getString(String str) {
+        return str.substring(str.length() / 2) + str.substring(0, str.length() / 2);
+    }
+
+___________________________
+задача 4
+
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] array = new int[n];
+        addElementToArray(scanner, n, array);
+        System.out.println(zadanieThree(array));
+        viewElementArray(array);
+    }
+
+    /**
+     * @param array входной массив
+     * @apiNote Дан массив целых чисел. Верно ли, что массив является симметричным.
+     */
+    private static String zadanieThree(int[] array) {
+        for (int i = 0; i < array.length / 2; i++) {
+            if (array[i] != array[array.length - 1 - i]) {
+                return "не симметричный";
+            }
+        }
+        return "симметричный";
+    }
+
+    /**
+     * @param array наш массив
+     * @apiNote выводим элементы массива
+     */
+    private static void viewElementArray(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.printf("array[%d]= %d \n", i, array[i]);
+        }
+    }
+
+    /**
+     * @param scanner вспомогательный класс для ввода с кл-ы
+     * @param n       количество элементов
+     * @param array   наш массив
+     * @apiNote вводим элементы массива
+     */
+    private static void addElementToArray(Scanner scanner, int n, int[] array) {
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+    }
+
